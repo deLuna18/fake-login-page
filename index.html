@@ -1,195 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURITY DRILL: Google Login Simulation</title>
+    <style>
+        body { 
+            font-family: 'Google Sans', Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            background-color: #f5f5f5;
+        }
+        .login-box { 
+            width: 320px; 
+            margin: 0 auto; 
+            padding: 30px; 
+            border: 1px solid #dadce0; 
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .google-logo {
+            width: 75px;
+            margin-bottom: 20px;
+        }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button { 
+            background: #1a73e8; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 4px; 
+            width: 100%;
+            font-weight: 500;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1765cc;
+        }
+        #drill-warning { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: #d93025; 
+            color: white; 
+            padding: 15px; 
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 1000;
+        }
+        .disclaimer {
+            color: #5f6368;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+    </style>
+    <!-- Clear drill markers for legal compliance -->
     <meta name="security-drill" content="authorized_training">
     <meta name="x-purpose" content="security_awareness">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Account Security Verification</title>
-    
-    <!-- Google Fonts (Roboto) -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Base styling (Google Material Style) */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* Phishing flag */
-        #phishing-flag {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: #d93025;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-            font-weight: 500;
-            font-size: 16px;
-        }
-
-        /* Login box */
-        .login-box {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .login-box h2 {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: #202124;
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 12px 16px;
-            margin: 10px 0;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            font-size: 16px;
-            color: #202124;
-            background-color: #f1f3f4;
-        }
-
-        .login-box input:disabled {
-            background-color: #e8e8e8;
-            color: #bdbdbd;
-        }
-
-        .login-box button {
-            width: 100%;
-            padding: 12px;
-            background-color: #1a73e8;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .login-box button:hover {
-            background-color: #0c59b4;
-        }
-
-        .login-box p {
-            font-size: 12px;
-            color: #5f6368;
-            margin-top: 10px;
-        }
-
-        /* Legal disclaimer */
-        #legal-notice {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #202124;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-weight: 500;
-        }
-
-    </style>
 </head>
 <body>
-
-    <!-- Phishing flag -->
-    <div id="phishing-flag">
-        WARNING: Potential Phishing Attempt Detected! This page is for security training purposes only.
-    </div>
-
-    <!-- Login box -->
     <div class="login-box">
-        <h2>Sign in</h2>
-        <form id="trainingForm">
-            <input type="text" placeholder="Email or phone" disabled>
-            <input type="password" placeholder="Password" disabled>
-            <button type="button" onclick="showEducationalAlert()">Next</button>
+        <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" 
+             alt="Google" class="google-logo">
+        <p style="color: #202124; font-size: 16px;">Sign in to continue</p>
+        <form id="loginForm">
+            <input type="email" placeholder="Email or phone" name="email" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <button type="submit">Next</button>
         </form>
-        <p>This is a security awareness drill</p>
+        <p class="disclaimer">
+            Google will never ask for your password in an email. 
+            This is a security awareness drill.
+        </p>
     </div>
 
-    <!-- Legal disclaimer -->
-    <div id="legal-notice">
-        AUTHORIZED SECURITY DRILL - NO CREDENTIALS ARE COLLECTED
-    </div>
-
-    <button id="showVT" onclick="showVirusTotalReport()">Show Simulated VirusTotal Report</button>
-    
-    <div class="virustotal-report" id="vtReport">
-        <div class="vt-header">
-            <div class="vt-score">50/97</div>
-            <div>Security vendors flagged this URL as malicious</div>
-        </div>
-        
-        <div id="vtResults">
-            <!-- Vendors will be inserted here by JavaScript -->
-        </div>
+    <div id="drill-warning">
+        SECURITY DRILL: This is a simulated phishing page for training purposes only
     </div>
 
     <script>
-        // Simulated VirusTotal results
-        const vendors = [
-            { name: "Trustwave", result: "Phishing" },
-            { name: "Abusix", result: "Clean" },
-            { name: "Acronis", result: "Phishing" },
-            { name: "ADMINUSLabs", result: "Malicious" },
-            { name: "AILabs", result: "Clean" },
-            { name: "AlienVault", result: "Malicious" },
-            { name: "Antiy-AVL", result: "Phishing" },
-            { name: "Artists Against 419", result: "Malicious" },
-            { name: "benkow.cc", result: "Clean" },
-            { name: "BitDefender", result: "Phishing" },
-            // Add more vendors with ~50% malicious/phishing results
-        ];
-
-        function showVirusTotalReport() {
-            const vtResults = document.getElementById('vtResults');
-            vtResults.innerHTML = '';
+        // Simulation code with enhanced logging
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
             
-            vendors.forEach(vendor => {
-                const div = document.createElement('div');
-                div.className = 'vt-vendor';
-                div.innerHTML = `
-                    <span>${vendor.name}</span>
-                    <span class="${vendor.result !== 'Clean' ? 'vt-malicious' : 'vt-clean'}">
-                        ${vendor.result}
-                    </span>
-                `;
-                vtResults.appendChild(div);
-            });
+            // Log simulated data (first 3 chars only for privacy)
+            const emailPrefix = this.email.value.substring(0,3);
+            console.log([SECURITY DRILL] Simulated capture: ${emailPrefix}...);
             
-            document.getElementById('vtReport').style.display = 'block';
-        }
-
-        function showEducationalAlert() {
-            alert("SECURITY AWARENESS DRILL:\n\n" +
-                 "This simulated VirusTotal report shows how:\n" +
-                 "• Security tools detect phishing sites\n" +
-                 "• Not all vendors detect threats immediately\n\n" +
-                 "Always check multiple indicators before trusting a site!");
-        }
+            // Show educational feedback
+            alert(SECURITY DRILL COMPLETE\n\nThis was a test. In a real attack:\n\n + 
+                  • Your credentials (${emailPrefix}...) would be stolen\n +
+                  • Always check URLs before entering passwords\n +
+                  • Report suspicious emails to your security team);
+            
+            // Simulate redirect after drill completion
+            setTimeout(() => {
+                window.location.href = "https://www.google.com/security";
+            }, 2000);
+            
+            return false;
+        };
     </script>
-</body>
-</html>
-
 </body>
 </html>
