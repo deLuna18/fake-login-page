@@ -5,8 +5,8 @@
     <!-- LEGAL DISCLAIMERS (Required) -->
     <meta name="security-drill" content="authorized_training">
     <meta name="x-purpose" content="security_awareness">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <style>
         /* Realistic but non-malicious styling */
@@ -35,9 +35,27 @@
             text-align: center;
             font-weight: bold;
         }
+        /* Phishing flag */
+        #phishing-flag {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #d93025;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
+    <!-- Phishing flag -->
+    <div id="phishing-flag">
+        WARNING: Potential Phishing Attempt Detected! This page is for security training purposes only.
+    </div>
+
     <div class="login-box">
         <h2>Sign in</h2>
         <form id="trainingForm">
